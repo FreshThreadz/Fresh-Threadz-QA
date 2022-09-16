@@ -8,11 +8,14 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT;
-// app.use(express.json());
 // app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express_1.default.json());
 app.get('/', (req, res) => {
     res.send('Express + TypeScript Server');
 });
+const qaRouter = require('./routes');
+app.use('/qa', qaRouter);
 app.listen(port, () => {
     console.log(`[server]: Server is running at https://localhost:${port}`);
 });
+// connectionDemo();

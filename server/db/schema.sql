@@ -30,8 +30,8 @@ CREATE TABLE answers_photos (
   url TEXT
 );
 
-COPY answers FROM '/Users/GODBODYLALLANA/Desktop/hackreactor/rfp2207-system-design-capstone/sdc-superman-q-a/server/db/sdc-superman-answers.csv' DELIMITER ',' CSV HEADER;
+COPY questions FROM '/Users/GODBODYLALLANA/Desktop/hackreactor/rfp2207-system-design-capstone/sdc-superman-service-qa/server/db/sdc-superman-questions.csv' DELIMITER ',' CSV HEADER;
 
-COPY answers_photos FROM '/Users/GODBODYLALLANA/Desktop/hackreactor/rfp2207-system-design-capstone/sdc-superman-q-a/server/db/sdc-superman-answers_photos.csv' DELIMITER ',' CSV HEADER;
+COPY answers FROM '/Users/GODBODYLALLANA/Desktop/hackreactor/rfp2207-system-design-capstone/sdc-superman-service-qa/server/db/sdc-superman-answers.csv' DELIMITER ',' CSV HEADER;
 
-COPY questions FROM '/Users/GODBODYLALLANA/Desktop/hackreactor/rfp2207-system-design-capstone/sdc-superman-q-a/server/db/sdc-superman-questions.csv' DELIMITER ',' CSV HEADER;
+COPY answers_photos FROM '/Users/GODBODYLALLANA/Desktop/hackreactor/rfp2207-system-design-capstone/sdc-superman-service-qa/server/db/sdc-superman-answers_photos.csv' DELIMITER ',' CSV HEADER;
