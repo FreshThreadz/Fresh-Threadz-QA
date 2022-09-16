@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectionDemo = exports.pool = void 0;
 const { Pool } = require('pg');
-dotenv.config();
 exports.pool = new Pool({
     user: process.env.USER,
     database: process.env.DB,

@@ -1,4 +1,7 @@
 /client/dist/bundle.js
+/server/db/sdc-superman-questions.csv
+/server/db/sdc-superman-answers.csv
+/server/db/sdc-superman-answers_photos.csv
 node_modules
 .env
 FEC_BMW.pem

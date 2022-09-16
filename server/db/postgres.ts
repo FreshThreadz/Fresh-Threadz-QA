@@ -1,5 +1,4 @@
 const { Pool } = require('pg');
-dotenv.config();
 
 export const pool = new Pool({
   user: process.env.USER,
