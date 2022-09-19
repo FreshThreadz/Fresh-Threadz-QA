@@ -1,25 +1,33 @@
-const models = require('../models/questions');
+const qModels = require('../models/questions');
 
-// GET /qa/questions
-// POST /qa/questions
-// PUT /qa/questions/:question_id/helpful
 module.exports = {
   getQuestions: async (req, res) => {
-    console.log('req.query in controller....', req.query);
-    console.log('req.params in controller....', req.params);
-    // console.log('res...', res);
-    const fetchQuestions = await models.getAll();
-    const questionsResponse = {
-      "product_id": req.query.product_id,
-      "results": fetchQuestions.rows,
-    };
-    res.send(questionsResponse);
-    // console.log(questionsReponse);
-    return res.json(fetchQuestions);
+    // console.log('req.query in get q controller....', req.query);
+    // console.log('req.params in get q controller....', req.params);
+    const productId = req.query.product_id;
+    const fetchQuestions = await qModels.getAll(productId);
+
+    res.status(200).send(fetchQuestions.rows[0].json_build_object);
   },
   postQuestion: async (req, res) => {
-    const params = [req.body.body, req.body.asker_name, req.body.asker_email, req.body.product_id];
-    const sendQuestion = await models.post(params);
-    return res.json(sendQuestion);
+    const params = [req.body.product_id, req.body.question_body, req.body.asker_name, req.body.asker_email, 0];
+    // console.log('params in post q controller....', params);
+
+    await qModels.post(params);
+    res.status(201).send('Post created successfully!');
+  },
+  markQuestion: async (req, res) => {
+    // console.log('req.params in put q controller....', req.params);
+    const questionIdParams = req.params.questionId;
+
+    await qModels.putHelpful(questionIdParams);
+    res.status(204);
+  },
+  reportQuestion: async (req, res) => {
+    // console.log('req.params in put q controller....', req.params);
+    const questionIdParams = req.params.questionId;
+
+    await qModels.putReport(questionIdParams);
+    res.status(204);
   }
 }

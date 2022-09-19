@@ -3,25 +3,25 @@ CREATE DATABASE questionsanswers;
 \c questionsanswers;
 
 CREATE TABLE questions (
-  id bigserial PRIMARY KEY,
+  question_id bigserial PRIMARY KEY,
   product_id BIGINT,
-  body TEXT,
-  date_written BIGINT,
+  question_body TEXT,
+  question_date BIGINT,
   asker_name TEXT,
   asker_email TEXT,
   reported BOOLEAN DEFAULT FALSE,
-  helpful INT
+  question_helpfulness INT
 );
 
 CREATE TABLE answers (
   id bigserial PRIMARY KEY,
-  question_id BIGINT REFERENCES questions (id),
+  question_id BIGINT REFERENCES questions (question_id),
   body TEXT,
   date_written BIGINT,
   answerer_name TEXT,
   answerer_email TEXT,
   reported BOOLEAN DEFAULT FALSE,
-  helpful INT
+  helpfulness INT
 );
 
 CREATE TABLE answers_photos (
@@ -35,3 +35,7 @@ COPY questions FROM '/Users/GODBODYLALLANA/Desktop/hackreactor/rfp2207-system-de
 COPY answers FROM '/Users/GODBODYLALLANA/Desktop/hackreactor/rfp2207-system-design-capstone/sdc-superman-service-qa/server/db/sdc-superman-answers.csv' DELIMITER ',' CSV HEADER;
 
 COPY answers_photos FROM '/Users/GODBODYLALLANA/Desktop/hackreactor/rfp2207-system-design-capstone/sdc-superman-service-qa/server/db/sdc-superman-answers_photos.csv' DELIMITER ',' CSV HEADER;
+
+ALTER TABLE questions ALTER COLUMN question_date TYPE TIMESTAMP USING to_timestamp(question_date/1000);
+
+ALTER TABLE answers ALTER COLUMN date_written TYPE TIMESTAMP USING to_timestamp(date_written/1000);
