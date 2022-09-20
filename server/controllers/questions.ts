@@ -21,6 +21,7 @@ module.exports = {
     const questionIdParams = req.params.questionId;
 
     await qModels.putHelpful(questionIdParams);
+    console.log('Marked question as helpful.');
     res.status(204);
   },
   reportQuestion: async (req, res) => {
@@ -28,6 +29,7 @@ module.exports = {
     const questionIdParams = req.params.questionId;
 
     await qModels.putReport(questionIdParams);
+    console.log('Reported question.');
     res.status(204);
   }
 }

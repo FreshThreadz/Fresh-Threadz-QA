@@ -1,7 +1,5 @@
 const aModels = require('../models/answers');
 
-// POST /qa/questions/:question_id/answers
-// PUT /qa/answers/:answer_id/helpful
 //PUT /qa/answers/:answer_id/report
 module.exports = {
   getAnswers: async (req, res) => {
@@ -24,8 +22,31 @@ module.exports = {
 
     const postAnswer = await aModels.post(params);
     const answerId = postAnswer.rows[0].id;
-    console.log('postAnswer id...', answerId);
+    // console.log('photosArr....', photosArrParams);
+    // console.log('postAnswer answerId...', answerId);
+
+    photosArrParams.forEach((url) => {
+      aModels.postPhotos(answerId, `'${url}'`);
+    });
     // const postPhotos = await aModels.postPhotos(photosArrParams);
     res.status(201).send('Post created successfully!');
+  },
+  markAnswer: async (req, res) => {
+    // console.log('req.query in put a controller....', req.query);
+    // console.log('req.params in put a controller....', req.params);
+    const answerId = req.params.answerId;
+
+    await aModels.putHelpful(answerId);
+    console.log('Marked answer as helpful.');
+    res.status(204);
+  },
+  reportAnswer: async (req, res) => {
+    // console.log('req.query in put a controller....', req.query);
+    // console.log('req.params in put a controller....', req.params);
+    const answerId = req.params.answerId;
+
+    await aModels.putReport(answerId);
+    console.log('Reported answer.');
+    res.status(204);
   }
 }
