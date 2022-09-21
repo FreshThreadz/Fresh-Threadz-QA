@@ -8,6 +8,7 @@ const app: Express = express();
 const port = process.env.PORT;
 
 // app.use(express.static(path.join(__dirname, '../client/dist')));
+
 app.use(express.json());
 
 app.get('/', (req: Request, res: Response) => {
