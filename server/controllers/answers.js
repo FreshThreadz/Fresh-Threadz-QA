@@ -12,6 +12,7 @@ module.exports = {
         // console.log('count...', count);
         const fetchAnswers = await aModels.getAll(questionIdParams, page, count);
         res.status(200).send(fetchAnswers.rows[0].json_build_object);
+        console.log('Retrieved data successfully.');
     },
     postAnswer: async (req, res) => {
         // console.log('req.query in post a controller....', req.query);
@@ -27,7 +28,7 @@ module.exports = {
             aModels.postPhotos(answerId, `'${url}'`);
         });
         // const postPhotos = await aModels.postPhotos(photosArrParams);
-        res.status(201).send('Post created successfully!');
+        res.status(201).send('Post created successfully.');
     },
     markAnswer: async (req, res) => {
         // console.log('req.query in put a controller....', req.query);

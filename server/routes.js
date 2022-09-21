@@ -3,8 +3,6 @@ const express = require('express');
 const router = express.Router();
 const { getQuestions, postQuestion, markQuestion, reportQuestion } = require('./controllers/questions');
 const { getAnswers, postAnswer, markAnswer, reportAnswer } = require('./controllers/answers');
-// PUT /qa/answers/:answer_id/helpful
-// PUT /qa/answers/:answer_id/report
 //QUESTIONS ENDPOINT
 router.get('/questions', getQuestions);
 router.post('/questions', postQuestion);

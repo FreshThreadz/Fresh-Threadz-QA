@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const { getQuestions, postQuestion, markQuestion, reportQuestion } = require('./controllers/questions');
-
 const { getAnswers, postAnswer, markAnswer, reportAnswer } = require('./controllers/answers');
 
 //QUESTIONS ENDPOINT
