@@ -16,6 +16,6 @@ app.get('/', (req, res) => {
 const qaRouter = require('./routes');
 app.use('/qa', qaRouter);
 app.listen(port, () => {
-    console.log(`[server]: Server is running at https://localhost:${port}`);
+    console.log(`Listening on port: ${port}`);
 });
 // connectionDemo();

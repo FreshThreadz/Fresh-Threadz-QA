@@ -2,6 +2,9 @@
 /server/db/sdc-superman-questions.csv
 /server/db/sdc-superman-answers.csv
 /server/db/sdc-superman-answers_photos.csv
+/server/db/.sdc-superman-questions.csv.icloud
+/server/db/.sdc-superman-answers.csv.icloud
+/server/db/.sdc-superman-answers_photos.csv.icloud
 node_modules
 .env
 FEC_BMW.pem
