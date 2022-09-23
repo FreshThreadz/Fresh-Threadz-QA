@@ -3,9 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectionDemo = exports.pool = void 0;
 const { Pool } = require('pg');
 exports.pool = new Pool({
-    user: process.env.USER,
+    user: process.env.USERNAME,
     database: process.env.DB,
-    password: process.env.PASS,
+    password: process.env.PASSWORD,
     port: process.env.DBPORT,
     host: process.env.HOST
 });
