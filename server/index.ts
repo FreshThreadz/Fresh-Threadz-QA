@@ -8,7 +8,8 @@ const app: Express = express();
 const port = process.env.PORT;
 
 // app.use(express.static(path.join(__dirname, '../client/dist')));
-
+const morgan = require('morgan');
+app.use(morgan('dev'));
 app.use(express.json());
 
 app.get('/', (req: Request, res: Response) => {
