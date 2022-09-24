@@ -1,89 +1,80 @@
-![banner](https://static1.cbrimages.com/wordpress/wp-content/uploads/2019/07/The-Boys-Homelander.jpg)
-# SDC Superman
+# Overview
 
-### Table of Contents
-1. [General Info](#general-info)
-2. [Demos](#demo)
-3. [Getting Started](#start)
-4. [Tech Stack](#tech)
-5. [Team members](#team)
+Create a REST API for Questions and Answers widget modeled after the Atelier API. Deploy and integrate service to an existing e-commerce front-end application.
 
-<a name="general-info"></a>
-### General Info 
-<!--![Draft](https://img.shields.io/badge/Draft-5a29e4.svg?style=flat&logoColor=white) <br />-->
-This project simulates an interactive e-commerce product page utilizing React and CSS to demonstrate front end competency. 
+##Database
 
+Utilize Postgres database to store relational data between Questions, Answers, and Photos. Postgres allows us to minimize redundancy in data and index foriegn keys; considering the ratio of reads to writes may skew heavily on reads I opted for Postgres to improve performance.
 
-<a name="demo"></a>
-### Demos
-<details><summary>Overview</summary>
-  
-![Overview-Demo](https://user-images.githubusercontent.com/106702313/189502102-b773c4ea-1d12-49bf-943f-5a679b6b6d62.gif)
+##Optimizations
 
-</details>
+1. The current shape of the Atelier API data is as follows:
 
-<details><summary>Product Detail</summary>
-  
-![Product-Demo](https://user-images.githubusercontent.com/106702313/189499053-f32a7faf-c601-4565-a936-8435889b0bb1.gif)
-  
-</details>
-
-<details><summary>Related Items & Outfits</summary>
-  
-![RIO-Demo](https://user-images.githubusercontent.com/106702313/189499071-b3f1ba29-4a8e-4f63-92b5-521baea4715d.gif)
-  
-</details>
-
-<details><summary>Questions & Answers</summary>
-  
-![QA-Demo](https://user-images.githubusercontent.com/106702313/189500121-703fe909-0e24-4638-8a6f-cd7d96f1c137.gif)
-  
-</details>
-
-<details><summary>Ratings & Reviews</summary>
-  
-![RR-Demo](https://user-images.githubusercontent.com/106702313/189500467-875ab081-8ea1-4330-8996-2ef07ede429a.gif)
-  
-</details>
-
-<a name="start"></a>
-### Getting Started
-Clone this repo onto your local machine 
+```json
+{
+  "product_id": "5",
+  "results": [{
+        "question_id": 37,
+        "question_body": "Why is this product cheaper here than other sites?",
+        "question_date": "2018-10-18T00:00:00.000Z",
+        "asker_name": "williamsmith",
+        "question_helpfulness": 4,
+        "reported": false,
+        "answers": {
+          68: {
+            "id": 68,
+            "body": "We are selling it here without any markup from the middleman!",
+            "date": "2018-08-18T00:00:00.000Z",
+            "answerer_name": "Seller",
+            "helpfulness": 4,
+            "photos": []
+            // ...
+          }
+        }
+      },
+      {
+        "question_id": 38,
+        "question_body": "How long does it last?",
+        "question_date": "2019-06-28T00:00:00.000Z",
+        "asker_name": "funnygirl",
+        "question_helpfulness": 2,
+        "reported": false,
+        "answers": {
+          70: {
+            "id": 70,
+            "body": "Some of the seams started splitting the first time I wore it!",
+            "date": "2019-11-28T00:00:00.000Z",
+            "answerer_name": "sillyguy",
+            "helpfulness": 6,
+            "photos": [],
+          },
+          78: {
+            "id": 78,
+            "body": "9 lives",
+            "date": "2019-11-12T00:00:00.000Z",
+            "answerer_name": "iluvdogz",
+            "helpfulness": 31,
+            "photos": [],
+          }
+        }
+      },
+      // ...
+  ]
+}
 ```
-https://github.com/FEC-Boy-Meets-World/rfp2207-fec.git
-```
-Make a copy of the `example.env` file and rename it to `.env`\
-Replace `PUT_YOUR_GITHUB_API_TOKEN_HERE` with your github token\
-Run the following scripts in your terminal
-  ```
-  npm install
-  npm run dev
-  ```
-Open `localhost:3000` on your browser
+To keep the data consistent and allow it to integerate to the front-end applicaiton properly I opted for nested queries as opposed to chaining together individual queries and building an object to return. The results are performant queries and which seperate computing logic from our model funcitons.
 
-<a name="tech"></a>
-### Tech Stack
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![React Hook Form](https://img.shields.io/badge/React%20Hook%20Form-%23EC5990.svg?style=for-the-badge&logo=reacthookform&logoColor=white) 
-![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
-![Axios](https://img.shields.io/badge/axios-5a29e4.svg?style=for-the-badge&logo=axios&logoColor=white)
-![Babel](https://img.shields.io/badge/Babel-F9DC3e?style=for-the-badge&logo=babel&logoColor=black)
-![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white) <br />
+![code-sample](https://user-images.githubusercontent.com/18265165/192120539-9e55a22c-4630-4546-a438-a7328405a85a.png)
 
+2. The query speeds for 1000 requests per second on 1 server is as follows:
 
-<a name="team"></a>
-### Team Boy Meets World
-Product Detail: Ivan Luk\
-[![Linkedin: LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/luki1/)
-[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/theivanluk)
+![Screen Shot 2022-09-24 at 2 58 50 PM](https://user-images.githubusercontent.com/18265165/192120593-5aeb7eb9-4d8e-4e43-9ce7-7b7624e7807d.png)
 
-Ratings Reviews: Brian Pham\
-[![Linkedin: LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white&link=https://www.linkedin.com/in/lbrian-phaml/)](https://www.linkedin.com/in/lbrian-phaml/)
-[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white&link=https://github.com/brianpham97)](https://github.com/brianpham97)
+  - The first optimization I implemented was to create another instance of the service API and create a load balancer. Then we routed all the traffic to the load balancer which eased the stress on the server and this allowed heavy traffic to be evenly distrubuted in a round-robin style. The result is about a 6ms improvement in average response time.
+  
+  ![Screen Shot 2022-09-24 at 2 59 09 PM](https://user-images.githubusercontent.com/18265165/192120723-81afba1c-dd17-45e0-96b3-7c2f7cd602a8.png)
+  
+  -The second optimization I implemented was to add caching to the load balancer. We shaved off even more time on the average response with about a 13ms improvement from the first optimization.
+  
+  ![Screen Shot 2022-09-24 at 2 59 30 PM](https://user-images.githubusercontent.com/18265165/192120816-d1aa3680-b7f8-4d68-805f-7a735fc765f4.png)
 
-Question & Answers: Allan Viguilla\
-[![Linkedin: LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white&link=https://www.linkedin.com/in/allan-viguilla-35050a216/)](https://www.linkedin.com/in/allan-viguilla-35050a216/)
-[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white&link=https://github.com/allanviguilla)](https://github.com/allanviguilla)
