@@ -2,6 +2,10 @@
 
 Create a REST API for Questions and Answers widget modeled after the Atelier API. Deploy and integrate service to an existing e-commerce front-end application.
 
+## Technologies Used
+
+![node](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) ![express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white) ![postgres](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white) ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white) ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
+
 ## Database
 
 Utilize Postgres database to store relational data between Questions, Answers, and Photos. Postgres allows us to minimize redundancy in data and index foriegn keys; considering the ratio of reads to writes may skew heavily on reads I opted for Postgres to improve performance.
