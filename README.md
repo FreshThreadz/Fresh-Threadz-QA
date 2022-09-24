@@ -2,11 +2,11 @@
 
 Create a REST API for Questions and Answers widget modeled after the Atelier API. Deploy and integrate service to an existing e-commerce front-end application.
 
-##Database
+## Database
 
 Utilize Postgres database to store relational data between Questions, Answers, and Photos. Postgres allows us to minimize redundancy in data and index foriegn keys; considering the ratio of reads to writes may skew heavily on reads I opted for Postgres to improve performance.
 
-##Optimizations
+## Optimizations
 
 1. The current shape of the Atelier API data is as follows:
 
@@ -74,7 +74,7 @@ To keep the data consistent and allow it to integerate to the front-end applicai
   
   ![Screen Shot 2022-09-24 at 2 59 09 PM](https://user-images.githubusercontent.com/18265165/192120723-81afba1c-dd17-45e0-96b3-7c2f7cd602a8.png)
   
-  -The second optimization I implemented was to add caching to the load balancer. We shaved off even more time on the average response with about a 13ms improvement from the first optimization.
+  - The second optimization I implemented was to add caching to the load balancer. We shaved off even more time on the average response with about a 13ms improvement from the first optimization.
   
   ![Screen Shot 2022-09-24 at 2 59 30 PM](https://user-images.githubusercontent.com/18265165/192120816-d1aa3680-b7f8-4d68-805f-7a735fc765f4.png)
 
